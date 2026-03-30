@@ -30,5 +30,8 @@ public interface UsuariosRepository extends JpaRepository<Usuario,String> {
 	 
 	 Optional<Usuario> findOneByUsername(String username);//DERIVED QUERY METHODS
 	 
+	 boolean existsByUsername(String username);
+	 
+	 
 
 }

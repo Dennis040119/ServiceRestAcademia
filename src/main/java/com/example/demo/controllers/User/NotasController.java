@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Notas;
 import com.example.demo.entity.Usuario;
 import com.example.demo.security.PassGenerator;
-import com.example.demo.services.NotaServiceImpl;
-import com.example.demo.services.UsuarioServiceImp;
+import com.example.demo.services.impl.NotaServiceImpl;
+import com.example.demo.services.impl.UsuarioServiceImp;
 
 @RestController
 @Controller

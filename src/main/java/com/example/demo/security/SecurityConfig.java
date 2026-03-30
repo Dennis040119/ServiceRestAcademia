@@ -44,9 +44,10 @@ public class SecurityConfig {
 			//y aqui "LOQUESEA"
 			//auth.requestMatchers("usuario/usuarioList").hasRole("ADMIN");
 
-			auth.requestMatchers("usuario/usuarioList").authenticated(); 
-			auth.requestMatchers("/authenticate").permitAll();
-			auth.requestMatchers("videojuego/*").authenticated();
+			
+			auth.requestMatchers("/authenticate","usuario/usuarioList").permitAll();
+			//auth.requestMatchers("/asistencia/**").authenticated();
+			
 			auth.anyRequest().permitAll();
 			
 			

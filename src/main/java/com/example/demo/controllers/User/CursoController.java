@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Curso;
 import com.example.demo.entity.Docente;
 import com.example.demo.entity.Usuario;
-import com.example.demo.services.CursoServiceImpl;
-import com.example.demo.services.DocenteServiceImpl;
+import com.example.demo.services.impl.CursoServiceImpl;
+import com.example.demo.services.impl.DocenteServiceImpl;
 
 @RestController
 @Controller

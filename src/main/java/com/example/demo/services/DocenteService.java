@@ -13,5 +13,7 @@ public interface DocenteService {
 	public void save(Docente Docente);
 	public void Actualizar(Docente Docente);
 	public void delete(String id);
+	List<Docente> listarConUsuario();
+	Optional<Docente> BuscarPorUsuarioId(String id);
 
 }

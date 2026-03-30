@@ -13,5 +13,6 @@ public interface AlumnoService {
 	public void save(Alumno Alumno);
 	public void Actualizar(Alumno Alumno);
 	public void delete(String id);
+	List<Alumno> listarPorGrado(String cursoId);
 
 }

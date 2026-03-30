@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Usuario;
 import com.example.demo.security.PassGenerator;
-import com.example.demo.services.AlumnoServiceImpl;
+import com.example.demo.services.impl.AlumnoServiceImpl;
 
 @RestController
 @Controller
@@ -33,7 +33,7 @@ public class AlumnoController {
 	@Autowired
 	AlumnoServiceImpl service;
 	
-	@GetMapping("/alumnoList")
+	@GetMapping("")
 	@ResponseBody
 	public ResponseEntity<?> listaAlumno() {
 		
@@ -41,6 +41,27 @@ public class AlumnoController {
 		List<Alumno> lista = null;
 		try {
 			 lista = service.listar();
+			 System.out.println(lista);
+		}
+		catch(DataAccessException e) {
+			
+			response.put("mensaje", "Error al realizar la petición en la BBDD");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}	
+		System.out.println(lista);
+		return new ResponseEntity<List<Alumno>>(lista, HttpStatus.OK);
+	}
+	
+	@GetMapping("/{grado}")
+	@ResponseBody
+	public ResponseEntity<?> listarByGrado(@PathVariable String grado) {
+		
+		Map<String, Object> response = new HashMap<>();
+		List<Alumno> lista = null;
+		try {
+			 lista = service.listarPorGrado(grado);
 			 System.out.println(lista);
 		}
 		catch(DataAccessException e) {
@@ -88,7 +109,7 @@ public class AlumnoController {
 		Map<String, Object> salida = new HashMap<>();
 		//Intentamos la transaction
 		
-		Optional<Alumno> alu = service.buscar(obj.getId_alumnos());
+		Optional<Alumno> alu = service.buscar(obj.getId());
 		if(alu.isPresent() ){
 			salida.put("mensaje", "Ya existe el Usuario");
 			
@@ -96,7 +117,7 @@ public class AlumnoController {
 			System.out.println("\n"+obj);
 			try {
 				
-				obj.setId_alumnos(Alumno.generarcodigo(service.listar().size()));
+				obj.setId(Alumno.generarcodigo(service.listar().size()));
 				
 				
 				
